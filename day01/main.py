@@ -1,8 +1,5 @@
 #! /usr/bin/env python3
-import itertools
 import sys
-from collections import Counter, defaultdict
-from typing import Tuple
 
 
 def get_data(path) -> list[str]:
@@ -22,6 +19,21 @@ def part1(directions: list[str]) -> int:
     return floor
 
 
+def part2(directions: list[str]) -> int:
+    floor = 0
+
+    for index, direction in enumerate(directions):
+        if direction == '(':
+            floor += 1
+        else:
+            floor -= 1
+
+        if floor == -1:
+            return index + 1
+
+    return -10000
+
+
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print('Usage: main.py <filename>')
@@ -31,4 +43,4 @@ if __name__ == '__main__':
 
     print(f'part1 {part1(get_data(file_name))}')
     print()
-    # print(f'part2 {part2(*get_data(file_name))}')
+    print(f'part2 {part2(get_data(file_name))}')
